@@ -1,0 +1,12 @@
+{
+    "name": "node_red_zigbee",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "zigbee_node_red.json",
+            "credentialsFile": "zigbee_node_red_cred.json"
+        }
+    }
+}

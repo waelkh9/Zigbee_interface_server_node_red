@@ -1,0 +1,43 @@
+[
+    {
+        "id": "f7a852575a507e30",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8b5eb2f1c770a105",
+        "type": "pythonshell in",
+        "z": "f7a852575a507e30",
+        "name": "humidity",
+        "pyfile": "/home/waelkh12/ble_esp32.py",
+        "virtualenv": "",
+        "continuous": true,
+        "stdInData": false,
+        "x": 580,
+        "y": 320,
+        "wires": [
+            [
+                "beb41cc912f41cc6"
+            ]
+        ]
+    },
+    {
+        "id": "beb41cc912f41cc6",
+        "type": "debug",
+        "z": "f7a852575a507e30",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 320,
+        "wires": []
+    }
+]
