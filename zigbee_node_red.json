@@ -1,13 +1,5 @@
 [
     {
-        "id": "f7a852575a507e30",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "2df1dfd158b253ed",
         "type": "tab",
         "label": "Flow 2",
@@ -47,39 +39,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "8b5eb2f1c770a105",
-        "type": "pythonshell in",
-        "z": "f7a852575a507e30",
-        "name": "humidity",
-        "pyfile": "/home/waelkh12/ble_esp32.py",
-        "virtualenv": "",
-        "continuous": true,
-        "stdInData": false,
-        "x": 580,
-        "y": 320,
-        "wires": [
-            [
-                "beb41cc912f41cc6"
-            ]
-        ]
-    },
-    {
-        "id": "beb41cc912f41cc6",
-        "type": "debug",
-        "z": "f7a852575a507e30",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 750,
-        "y": 320,
-        "wires": []
-    },
-    {
         "id": "5504d7e57750a247",
         "type": "mqtt in",
         "z": "2df1dfd158b253ed",
@@ -105,7 +64,7 @@
         "id": "fe464b47c0eff2b8",
         "type": "function",
         "z": "2df1dfd158b253ed",
-        "name": "function 1",
+        "name": "get_humidity_from_mqtt",
         "func": "msg.payload= msg.payload.humidity;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -113,7 +72,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 410,
         "y": 320,
         "wires": [
             [
@@ -125,15 +84,16 @@
         "id": "e4a68ecef4f0edcc",
         "type": "debug",
         "z": "2df1dfd158b253ed",
-        "name": "debug 3",
+        "name": "temp_humidity_vals",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
+        "x": 1040,
         "y": 240,
         "wires": []
     },
@@ -141,7 +101,7 @@
         "id": "7a219abcac0d9d02",
         "type": "function",
         "z": "2df1dfd158b253ed",
-        "name": "function 2",
+        "name": "get_temp_from_mqtt",
         "func": "msg.payload= msg.payload.temperature;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -149,7 +109,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
+        "x": 420,
         "y": 200,
         "wires": [
             [
@@ -250,15 +210,16 @@
         "id": "e0289d94ffdc6595",
         "type": "debug",
         "z": "2df1dfd158b253ed",
-        "name": "debug 7",
+        "name": "global variables array",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 700,
+        "x": 740,
         "y": 440,
         "wires": []
     },
