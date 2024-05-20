@@ -664,8 +664,8 @@
         "virtualenv": "",
         "continuous": false,
         "stdInData": false,
-        "x": 500,
-        "y": 1520,
+        "x": 840,
+        "y": 1540,
         "wires": [
             [
                 "c79076b1c216d02b",
@@ -691,7 +691,7 @@
         "wires": [
             [
                 "f171cea0b358fd4a",
-                "0e3967dcd9d12ed9"
+                "a8aaaeacde570de3"
             ]
         ]
     },
@@ -699,48 +699,50 @@
         "id": "f171cea0b358fd4a",
         "type": "debug",
         "z": "2df1dfd158b253ed",
-        "name": "debug 4",
+        "name": "access_command",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 300,
-        "y": 1560,
+        "x": 170,
+        "y": 1520,
         "wires": []
     },
     {
         "id": "c79076b1c216d02b",
         "type": "debug",
         "z": "2df1dfd158b253ed",
-        "name": "debug 5",
+        "name": "image_quality_output_value",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
-        "y": 1460,
+        "x": 1080,
+        "y": 1540,
         "wires": []
     },
     {
         "id": "0e3967dcd9d12ed9",
         "type": "function",
         "z": "2df1dfd158b253ed",
-        "name": "function 1",
-        "func": "if (msg.payload= true) {\nreturn msg;\n}",
+        "name": "check_image_quality_condition",
+        "func": " if (msg.payload= true) {\nreturn msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 1380,
+        "x": 630,
+        "y": 1400,
         "wires": [
             [
                 "12212c1cf0a810d6"
@@ -751,7 +753,7 @@
         "id": "5604778b506f58f6",
         "type": "function",
         "z": "2df1dfd158b253ed",
-        "name": "function 2",
+        "name": "sets_access_as_global_event",
         "func": "global.set(\"access\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -759,7 +761,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
+        "x": 910,
         "y": 1400,
         "wires": [
             [
@@ -772,16 +774,17 @@
         "id": "5ba7cdd1a9ee0349",
         "type": "debug",
         "z": "2df1dfd158b253ed",
-        "name": "debug 6",
+        "name": "access_event_value",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 980,
-        "y": 1440,
+        "x": 1240,
+        "y": 1540,
         "wires": []
     },
     {
@@ -798,7 +801,7 @@
         "correl": "",
         "expiry": "",
         "broker": "ff246c28cc0fa0af",
-        "x": 930,
+        "x": 1170,
         "y": 1400,
         "wires": []
     },
@@ -952,5 +955,59 @@
                 "be57ed18809f8271"
             ]
         ]
+    },
+    {
+        "id": "a8aaaeacde570de3",
+        "type": "function",
+        "z": "2df1dfd158b253ed",
+        "name": "check_access_command",
+        "func": " if (msg.payload= true) {\nreturn msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1400,
+        "wires": [
+            [
+                "a6654533f4f911a6"
+            ]
+        ]
+    },
+    {
+        "id": "a6654533f4f911a6",
+        "type": "pythonshell in",
+        "z": "2df1dfd158b253ed",
+        "name": "image_quality",
+        "pyfile": "/home/waelkh12/Desktop/tf_lite_face_reco/facial_recognition_for_access_control/face_image_quality/face_image_quality.py",
+        "virtualenv": "",
+        "continuous": false,
+        "stdInData": false,
+        "x": 380,
+        "y": 1560,
+        "wires": [
+            [
+                "0e3967dcd9d12ed9",
+                "1d6df2401fc4d3e2"
+            ]
+        ]
+    },
+    {
+        "id": "1d6df2401fc4d3e2",
+        "type": "debug",
+        "z": "2df1dfd158b253ed",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 1620,
+        "wires": []
     }
 ]
