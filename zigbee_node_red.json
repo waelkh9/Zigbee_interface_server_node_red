@@ -418,7 +418,7 @@
         "type": "function",
         "z": "2df1dfd158b253ed",
         "name": "check_critical_temperature_trigger",
-        "func": "msg.topic=\"node-red-notification\"\nvar inputObject = msg.payload;\n\nvar criticalTemperature = inputObject.criticaltemp;\nvar criticalHumidity = inputObject.criticalhumidity;\n\nif (criticalTemperature || criticalHumidity) {\n    // If either critical temperature or critical humidity is true\n    msg.payload = \"Critical temperature or humidity condition is met.\";\n    return msg;\n} else {\n    // If neither critical temperature nor critical humidity is true\n    msg.payload = \"Critical conditions are not met.\";\n}\n\n",
+        "func": "msg.topic=\"node-red-notification\"\nvar inputObject = msg.payload;\n\nvar criticalTemperature = inputObject.criticaltemp;\nvar criticalHumidity = inputObject.criticalhumidity;\n\n// Define the interval time in milliseconds (e.g., 10 minutes = 600000 ms)\nvar intervalTime = 600000;\n\nif (criticalTemperature || criticalHumidity) {\n    // Get the current time\n    var currentTime = Date.now();\n\n    // Get the last sent time from the global context, defaulting to 0 if not set\n    var lastSentTime = context.global.get('lastSentTime') || 0;\n\n    // Check if the interval has passed since the last message was sent\n    if (currentTime - lastSentTime > intervalTime) {\n        // Update the last sent time in the global context\n        context.global.set('lastSentTime', currentTime);\n\n        // Set the message payload to indicate critical conditions\n        msg.payload = \"Critical temperature or humidity condition is met.\";\n        return msg;\n    } else {\n        // Interval has not passed, do not send a message\n        return null;\n    }\n} else {\n    // Critical conditions are not met, do not send a message\n    return null;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -430,7 +430,7 @@
         "wires": [
             [
                 "213873f1f694ec7c",
-                "be57ed18809f8271"
+                "40ab787b1fb4316f"
             ]
         ]
     },
@@ -455,7 +455,6 @@
         "id": "be57ed18809f8271",
         "type": "e-mail",
         "z": "2df1dfd158b253ed",
-        "d": true,
         "server": "mail.gmx.net",
         "port": "587",
         "authtype": "BASIC",
@@ -465,7 +464,7 @@
         "tls": true,
         "name": "node-redpi@gmx.de",
         "dname": "notification_temperature",
-        "x": 610,
+        "x": 890,
         "y": 900,
         "wires": []
     },
@@ -881,7 +880,7 @@
         "wires": []
     },
     {
-        "id": "44f132a8d0607ccc",
+        "id": "fa77ab7e9cddaf5d",
         "type": "inject",
         "z": "2df1dfd158b253ed",
         "name": "",
@@ -901,8 +900,53 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 370,
-        "y": 900,
+        "x": 80,
+        "y": 860,
+        "wires": [
+            [
+                "4e4eab1d17ba667b"
+            ]
+        ]
+    },
+    {
+        "id": "40ab787b1fb4316f",
+        "type": "trigger",
+        "z": "2df1dfd158b253ed",
+        "name": "email_trigger",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "95a41fd1732aba03"
+            ]
+        ]
+    },
+    {
+        "id": "95a41fd1732aba03",
+        "type": "function",
+        "z": "2df1dfd158b253ed",
+        "name": "function 3",
+        "func": "msg.topic=\"node-red-notification\";\nmsg.payload=\" critical values reached\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 920,
         "wires": [
             [
                 "be57ed18809f8271"
